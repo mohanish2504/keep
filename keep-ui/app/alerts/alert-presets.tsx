@@ -32,6 +32,7 @@ export default function AlertPresets({
   isLoading,
 }: Props) {
   const [isPrivate, setIsPrivate] = useState<boolean>(false);
+  console.log("Preset: ", preset)
 
   const handleSwitchChange = (value: boolean) => {
     setIsPrivate(value);
@@ -56,7 +57,7 @@ export default function AlertPresets({
 const handleCancelClick = () => {
   setIsModalOpen(false);
 };
-const handleokClick = () => {
+const handleOkClick = () => {
   setIsModalOpen(false);
 };
 
@@ -269,40 +270,30 @@ const handleokClick = () => {
 </Button>
 
 
-
 <Modal 
  isOpen={isModalOpen}
  onClose={() => setIsModalOpen(false)}
- title="New Preset"
- className=" m-0.20 "
- > 
-<div>
- <label className="m-20 bg-orange-100  " htmlFor={`${preset?.name ? "Update preset name?" : "Enter new preset name"}`}/>
-        <input
-        className="border-orange-100 "
-        color="orange"
-          value={modalInputValue}
-          onChange={handleModalInputChange}
-          defaultValue={preset?.name === "feed" || preset?.name === "deleted" ? "" : preset?.name}
-        />
-         <Switch 
-    id="switch"
-    name="switch"
-    checked={isPrivate}
-    onChange={handleSwitchChange} 
-    className="focus:outline-none focus:ring-2 focus:ring-orange-500  m-3.5"
-  />
-  <label 
-    htmlFor="switch"
-    className="text-gray-700 dark:text-gray-200 ml-2 text-sm font-medium m-8"
-  >
-    Save preset as private or global.
-  </label>  
-  <button className="bg-orange-100 w-40px h-40px rounded m-8" onClick={handleCancelClick}>Cancel</button>
-  <button className="text-orange-100 " onClick={handleokClick}>Ok</button>
-
+ title={`${preset?.name ? "Update preset name?" : "Enter new preset name"}`}
+> 
+<div className="text-base mb-2 mt-2">
+ <input className="w-full border-2 border-gray-300 rounded-lg p-2 mb-4 focus:border-blue-500 focus:ring-2 focus:ring-blue-200" type="text" value={modalInputValue} onChange={handleModalInputChange} placeholder={`${preset?.name ? "Update preset name?" : "Enter new preset name"}`} defaultValue={preset?.name === "feed" || preset?.name === "deleted" ? "" : preset?.name}/>
+ <div className="flex mb-2">
+    <Switch 
+      id="switch"
+      name="switch"
+      checked={isPrivate}
+      onChange={handleSwitchChange} 
+      className="focus:outline-none focus:ring-2 focus:ring-orange-500"
+    />
+    <label htmlFor="switch" className="h-6 ml-3">Set preset as private or global</label>
+ </div>
+ <div className="flex justify-end m-2">
+    <Button className="m-2" color="orange" size="md" variant="secondary" onClick={handleOkClick}>Ok</Button>
+    <Button className="m-2" color="orange" size="md" variant="secondary" onClick={handleCancelClick}>Cancel</Button>
+ </div>
 </div>
 </Modal>
+
 
  
 </div>

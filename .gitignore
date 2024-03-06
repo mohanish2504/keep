@@ -189,3 +189,4 @@ storage
 
 # otel files
 tempo-data/
+.gitpod.yml
